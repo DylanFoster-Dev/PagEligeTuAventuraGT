@@ -234,7 +234,6 @@
             document.getElementById('scene-title').textContent = escena.titulo;
             document.getElementById('scene-description').textContent = escena.descripcion;
             
-            // Mostrar el GIF si existe
             const gifContainer = document.getElementById('scene-gif');
             if (escena.gif) {
                 gifContainer.innerHTML = `<img src="${escena.gif}" alt="Escena de la carrera" class="scene-gif-img">`;
@@ -249,12 +248,17 @@
                 const boton = document.createElement('button');
                 boton.className = 'choice-btn';
                 boton.textContent = opcion.texto;
-                boton.onclick = () => mostrarEscena(opcion.siguiente);
+                boton.addEventListener('click', function() {
+                    mostrarEscena(opcion.siguiente);
+                });
                 contenedorOpciones.appendChild(boton);
             });
         }
 
-        window.onload = () => mostrarEscena('inicio');
+        // Asegurarnos de que el DOM esté cargado
+        document.addEventListener('DOMContentLoaded', function() {
+            mostrarEscena('inicio');
+        });
     </script>
 </body>
 </html> 
