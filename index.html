@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1: Tu Carrera al Éxito</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>F1: Tu Carrera al Éxito</h1>
+        </header>
+        <main>
+            <section class="story-container">
+                <div class="story-text">
+                    <h2 id="scene-title">El Gran Premio de tu Vida</h2>
+                    <p id="scene-description">Estás en la parrilla de salida del Gran Premio de Mónaco. Es tu primera temporada en F1 y has logrado una sorprendente pole position. El motor ruge, las luces están a punto de apagarse. ¿Qué estrategia eliges?</p>
+                </div>
+                <div id="scene-gif" class="scene-gif">
+                </div>
+                <div class="choices" id="choices-container">
+                </div>
+            </section>
+        </main>
+        <footer>
+            <p>© 2024 F1: Tu Carrera al Éxito</p>
+        </footer>
+    </div>
+
+    <script>
+        const story = {
+            inicio: {
+                titulo: "El Gran Premio de tu Vida",
+                descripcion: "Estás en la parrilla de salida del Gran Premio de Mónaco. Es tu primera temporada en F1 y has logrado una sorprendente pole position. El motor ruge, las luces están a punto de apagarse. ¿Qué estrategia eliges?",
+                gif: "https://64.media.tumblr.com/0a2d8c0d883bdeadeed1a951a7831c37/b9fbb7af048e84e7-2d/s500x750/ffb032bc4121631d355a9b3fbb5d606c363dab04.gifv",
+                opciones: [
+                    {
+                        texto: "Mantener la posición y defender en la primera curva",
+                        siguiente: "defensa"
+                    },
+                    {
+                        texto: "Arriesgar todo en la salida para asegurar la primera posición",
+                        siguiente: "ataque"
+                    }
+                ]
+            },
+            defensa: {
+                titulo: "Estrategia Defensiva",
+                descripcion: "Has elegido una estrategia conservadora. Logras mantener la primera posición en la primera curva, pero el piloto detrás de ti está muy cerca. En la primera vuelta, ¿qué haces?",
+                gif: "https://media1.tenor.com/m/tf7qjCtbqpQAAAAC/lewis-alonso-lewis-hamilton.gif",
+                opciones: [
+                    {
+                        texto: "Aumentar el ritmo para intentar escapar",
+                        siguiente: "escape"
+                    },
+                    {
+                        texto: "Mantener un ritmo constante y ahorrar neumáticos",
+                        siguiente: "conservador"
+                    }
+                ]
+            },
+            ataque: {
+                titulo: "Estrategia Agresiva",
+                descripcion: "¡Has arriesgado todo! Logras una salida perfecta y aumentas la ventaja. Sin embargo, estás consumiendo más neumáticos de lo esperado. ¿Qué decides?",
+                gif: "https://i.makeagif.com/media/2-29-2016/SMpwn6.gif",
+                opciones: [
+                    {
+                        texto: "Mantener el ritmo agresivo y arriesgar con los neumáticos",
+                        siguiente: "riesgo"
+                    },
+                    {
+                        texto: "Reducir el ritmo para preservar los neumáticos",
+                        siguiente: "conservador"
+                    }
+                ]
+            },
+            escape: {
+                titulo: "Intentando Escapar",
+                descripcion: "Has aumentado el ritmo y logras abrir una pequeña ventaja. Sin embargo, los neumáticos comienzan a degradarse. ¿Qué estrategia de pit stop eliges?",
+                gif: "https://i.pinimg.com/originals/71/d1/4d/71d14d31863eb920a46ec64f7a08693f.gif",
+                opciones: [
+                    {
+                        texto: "Entrar a boxes temprano para neumáticos nuevos",
+                        siguiente: "pit_early"
+                    },
+                    {
+                        texto: "Extender la stint actual al máximo",
+                        siguiente: "pit_late"
+                    }
+                ]
+            },
+            conservador: {
+                titulo: "Estrategia Conservadora",
+                descripcion: "Has elegido una estrategia de conservación de neumáticos. El piloto detrás está acercándose. ¿Qué haces?",
+                gif: "https://i.makeagif.com/media/5-15-2016/nPMhJy.gif",
+                opciones: [
+                    {
+                        texto: "Defender la posición a toda costa",
+                        siguiente: "defensa_final"
+                    },
+                    {
+                        texto: "Dejar pasar y seguir de cerca para atacar después",
+                        siguiente: "seguimiento"
+                    }
+                ]
+            },
+            riesgo: {
+                titulo: "Estrategia de Riesgo",
+                descripcion: "Has mantenido un ritmo agresivo. Los neumáticos están muy desgastados pero mantienes la ventaja. ¿Qué haces en la última vuelta?",
+                gif: "https://preview.redd.it/verstappen-squeezing-norris-2024-v-sainz-squeezing-v0-6mrgslk89r9d1.gif?width=600&auto=webp&s=feb19405ec6d7731d0eb228e228c57e4daebc6ed",
+                opciones: [
+                    {
+                        texto: "Entrar a boxes para neumáticos nuevos y atacar en la última vuelta",
+                        siguiente: "ultimo_ataque"
+                    },
+                    {
+                        texto: "Mantener la posición y defender hasta el final",
+                        siguiente: "defensa_final"
+                    }
+                ]
+            },
+            pit_early: {
+                titulo: "Pit Stop Temprano",
+                descripcion: "Has entrado a boxes temprano. Los neumáticos nuevos te dan buen ritmo, pero has perdido la primera posición. ¿Qué estrategia sigues?",
+                gif: "https://i.pinimg.com/originals/ab/00/de/ab00de6eddd4a2bfc0e0e80a9c63f67c.gif",
+                opciones: [
+                    {
+                        texto: "Atacar al líder con los neumáticos nuevos",
+                        siguiente: "ultimo_ataque"
+                    },
+                    {
+                        texto: "Mantener el ritmo y esperar a que los neumáticos del líder se degraden",
+                        siguiente: "seguimiento"
+                    }
+                ]
+            },
+            pit_late: {
+                titulo: "Pit Stop Tardío",
+                descripcion: "Has extendido la stint al máximo. Los neumáticos están muy desgastados pero mantienes la ventaja. ¿Qué haces?",
+                gif: "https://www.jottr.org/presentations/erum2018/imgs/formula_one_pitstop_724x412.gif",
+                opciones: [
+                    {
+                        texto: "Entrar a boxes ahora y atacar en las últimas vueltas",
+                        siguiente: "ultimo_ataque"
+                    },
+                    {
+                        texto: "Intentar llegar hasta el final con estos neumáticos",
+                        siguiente: "defensa_final"
+                    }
+                ]
+            },
+            defensa_final: {
+                titulo: "Defensa Final",
+                descripcion: "Estás en la última vuelta. El piloto detrás está muy cerca y tiene DRS. ¿Cómo defiendes?",
+                gif: "https://i.postimg.cc/LXTGY9hj/Turn-14.gif",
+                opciones: [
+                    {
+                        texto: "Defender la posición bloqueando la línea de frenada",
+                        siguiente: "victoria_defensa"
+                    },
+                    {
+                        texto: "Dejar pasar y atacar en la última curva",
+                        siguiente: "segundo_puesto"
+                    }
+                ]
+            },
+            seguimiento: {
+                titulo: "Seguimiento Táctico",
+                descripcion: "Has dejado pasar al líder y ahora lo sigues de cerca. ¿Cuándo atacas?",
+                gif: "https://gifdb.com/images/high/f1-verstappen-on-the-road-15jw85qtwtg6ysy4.gif",
+                opciones: [
+                    {
+                        texto: "Atacar en la última vuelta con DRS",
+                        siguiente: "victoria_ataque"
+                    },
+                    {
+                        texto: "Esperar a que cometa un error",
+                        siguiente: "segundo_puesto"
+                    }
+                ]
+            },
+            ultimo_ataque: {
+                titulo: "Último Ataque",
+                descripcion: "Tienes neumáticos nuevos y estás a punto de alcanzar al líder. ¿Cómo atacas?",
+                gif: "https://64.media.tumblr.com/f50dd703fb276bddf01dd279c076e347/c9c6308c4a49b3e2-61/s540x810/433f097a3bdc1460e9c670a53beaa972dbc46a6c.gif",
+                opciones: [
+                    {
+                        texto: "Atacar por el exterior en la última curva",
+                        siguiente: "victoria_ataque"
+                    },
+                    {
+                        texto: "Esperar a la recta principal",
+                        siguiente: "segundo_puesto"
+                    }
+                ]
+            },
+            victoria_defensa: {
+                titulo: "¡Victoria!",
+                descripcion: "¡Has logrado defender tu posición hasta el final! Una victoria épica en tu primera temporada en F1. El podio te espera y los aficionados están locos de emoción.",
+                gif: "https://64.media.tumblr.com/0e6c2cd1d066fd569744a50f766da0d1/91bb0fab5ad29f27-59/s400x600/ab7b195790535c2139bdd3539d2c6f2de0109ba8.gif",
+                opciones: [
+                    {
+                        texto: "Volver a empezar",
+                        siguiente: "inicio"
+                    }
+                ]
+            },
+            victoria_ataque: {
+                titulo: "¡Victoria por Ataque!",
+                descripcion: "¡Increíble! Has logrado superar al líder en la última vuelta con un ataque perfecto. Una victoria que será recordada en la historia de la F1.",
+                gif: "https://media1.tenor.com/m/l2C0J6g4vv8AAAAd/max-verstappen-10-wins-chadstappen.gif",
+                opciones: [
+                    {
+                        texto: "Volver a empezar",
+                        siguiente: "inicio"
+                    }
+                ]
+            },
+            segundo_puesto: {
+                titulo: "Segundo Puesto",
+                descripcion: "Has terminado en segundo lugar. Una gran actuación para tu primera temporada en F1. Has demostrado que tienes lo que se necesita para ser campeón.",
+                gif: "https://media1.tenor.com/m/seSfKmAhKf0AAAAd/f1-lando-norris.gif",
+                opciones: [
+                    {
+                        texto: "Volver a empezar",
+                        siguiente: "inicio"
+                    }
+                ]
+            }
+        };
+
+        function mostrarEscena(escenaId) {
+            console.log('Intentando mostrar escena:', escenaId);
+            const escena = story[escenaId];
+            if (!escena) {
+                console.error(`Escena no encontrada: ${escenaId}`);
+                return;
+            }
+            console.log('Escena encontrada:', escena);
+            
+            document.getElementById('scene-title').textContent = escena.titulo;
+            document.getElementById('scene-description').textContent = escena.descripcion;
+            
+            const gifContainer = document.getElementById('scene-gif');
+            if (escena.gif) {
+                gifContainer.innerHTML = `<img src="${escena.gif}" alt="Escena de la carrera" class="scene-gif-img">`;
+            } else {
+                gifContainer.innerHTML = '';
+            }
+            
+            const contenedorOpciones = document.getElementById('choices-container');
+            contenedorOpciones.innerHTML = '';
+            
+            escena.opciones.forEach(opcion => {
+                const boton = document.createElement('button');
+                boton.className = 'choice-btn';
+                boton.textContent = opcion.texto;
+                boton.onclick = () => {
+                    console.log('Botón clickeado, siguiente escena:', opcion.siguiente);
+                    mostrarEscena(opcion.siguiente);
+                };
+                contenedorOpciones.appendChild(boton);
+            });
+        }
+
+        // Asegurarnos de que el DOM esté cargado
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM cargado, iniciando historia...');
+            mostrarEscena('inicio');
+        });
+    </script>
+</body>
+</html> 
