@@ -24,7 +24,6 @@
             </section>
         </main>
         <footer>
-            <p>© 2024 F1: Tu Carrera al Éxito</p>
         </footer>
     </div>
 
@@ -146,7 +145,7 @@
                     },
                     {
                         texto: "Intentar llegar hasta el final con estos neumáticos",
-                        siguiente: "defensa_final"
+                        siguiente: "riesgo_final"
                     }
                 ]
             },
@@ -231,17 +230,11 @@
         };
 
         function mostrarEscena(escenaId) {
-            console.log('Intentando mostrar escena:', escenaId);
             const escena = story[escenaId];
-            if (!escena) {
-                console.error(`Escena no encontrada: ${escenaId}`);
-                return;
-            }
-            console.log('Escena encontrada:', escena);
-            
             document.getElementById('scene-title').textContent = escena.titulo;
             document.getElementById('scene-description').textContent = escena.descripcion;
             
+            // Mostrar el GIF si existe
             const gifContainer = document.getElementById('scene-gif');
             if (escena.gif) {
                 gifContainer.innerHTML = `<img src="${escena.gif}" alt="Escena de la carrera" class="scene-gif-img">`;
@@ -256,19 +249,12 @@
                 const boton = document.createElement('button');
                 boton.className = 'choice-btn';
                 boton.textContent = opcion.texto;
-                boton.onclick = () => {
-                    console.log('Botón clickeado, siguiente escena:', opcion.siguiente);
-                    mostrarEscena(opcion.siguiente);
-                };
+                boton.onclick = () => mostrarEscena(opcion.siguiente);
                 contenedorOpciones.appendChild(boton);
             });
         }
 
-        // Asegurarnos de que el DOM esté cargado
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log('DOM cargado, iniciando historia...');
-            mostrarEscena('inicio');
-        });
+        window.onload = () => mostrarEscena('inicio');
     </script>
 </body>
 </html> 
